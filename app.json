@@ -4,10 +4,10 @@
     "slug": "precoro-test",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/precoroLogo.svg",
+    "icon": "./assets/images/precoroLogo.svg",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/precoroLogo.svg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/images/precoroLogo.svg",
         "backgroundColor": "#ffffff"
       }
     },
