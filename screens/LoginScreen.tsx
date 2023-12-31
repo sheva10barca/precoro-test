@@ -1,13 +1,28 @@
-import { Button, Text, TextInput, View } from 'react-native';
-import CustomLinearGradient from '../components/CustomLinearGradient';
 import { useContext, useState } from 'react';
+import { Alert, Button, Text, TextInput, View } from 'react-native';
+
 import { AuthContext } from '../providers/AuthProvider';
+import { login } from '../api/api';
+
+import CustomLinearGradient from '../components/CustomLinearGradient';
 
 export const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { setIsAuthenticated } = useContext(AuthContext);
+  const { setAuthToken } = useContext(AuthContext);
+
+  const handleLogin = async () => {
+    if (email === 'test' && password === 'password') {
+      const token = await login(email, password);
+
+      setAuthToken(token);
+    } else {
+      Alert.alert(
+        'You can log in only with email: "test" and password: "password"',
+      );
+    }
+  };
 
   return (
     <CustomLinearGradient>
@@ -36,7 +51,7 @@ export const LoginScreen = () => {
             marginTop: 20,
           }}
         />
-        <Button title="Log In" onPress={() => setIsAuthenticated(true)} />
+        <Button title="Log In" onPress={handleLogin} />
       </View>
     </CustomLinearGradient>
   );

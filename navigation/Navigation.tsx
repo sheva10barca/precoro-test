@@ -6,11 +6,11 @@ import { AuthenticationStack } from './AuthenticationStack';
 import { AuthContext } from '../providers/AuthProvider';
 
 export const Navigation = () => {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { authToken } = useContext(AuthContext);
 
   return (
     <NavigationContainer>
-      {isAuthenticated ? <MainStack /> : <AuthenticationStack />}
+      {authToken ? <MainStack /> : <AuthenticationStack />}
     </NavigationContainer>
   );
 };

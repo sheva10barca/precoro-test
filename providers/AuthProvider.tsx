@@ -5,20 +5,20 @@ type ProviderProps = {
 };
 
 type ContextProps = {
-  isAuthenticated: boolean;
-  setIsAuthenticated: React.Dispatch<SetStateAction<boolean>>;
+  authToken: string | null;
+  setAuthToken: React.Dispatch<SetStateAction<string | null>>;
 };
 
 export const AuthContext = createContext<ContextProps>({
-  isAuthenticated: false,
-  setIsAuthenticated: () => {},
+  authToken: null,
+  setAuthToken: () => {},
 });
 
 export const AuthProvider: React.FC<ProviderProps> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authToken, setAuthToken] = useState<string | null>(null);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+    <AuthContext.Provider value={{ authToken, setAuthToken }}>
       {children}
     </AuthContext.Provider>
   );
