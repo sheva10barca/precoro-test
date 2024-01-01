@@ -8,6 +8,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import { AuthContext } from '../providers/AuthProvider';
 import { login } from '../api/api';
@@ -17,7 +18,6 @@ import CustomLinearGradient from '../components/CustomLinearGradient';
 import PrecoroLogo from '../assets/images/precoroLogo.svg';
 import LoginIcon from '../assets/images/auth-screen-icons/login.svg';
 import PasswordIcon from '../assets/images/auth-screen-icons/password.svg';
-// import EyeIcon from '../assets/images/auth-screen-icons/eye.svg';
 import GoogleIcon from '../assets/images/auth-screen-icons/google.svg';
 
 export const LoginScreen = () => {
@@ -107,13 +107,19 @@ export const LoginScreen = () => {
                 style={styles.passwordInput}
               />
 
-              {/* // TODO FIX ICON */}
               <Pressable
                 style={styles.showPasswordButton}
                 onPress={handleShowPassword}
               >
-                {/* <EyeIcon /> */}
-                <Text>{showPassword ? 'Hide' : 'Show'}</Text>
+                {showPassword ? (
+                  <Ionicons
+                    name="eye-off-outline"
+                    size={20}
+                    color={'#BBBDCB'}
+                  />
+                ) : (
+                  <Ionicons name="eye-outline" size={20} color={'#BBBDCB'} />
+                )}
               </Pressable>
             </View>
           </View>
