@@ -5,20 +5,18 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
-  TextInput,
   View,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 
 import { AuthContext } from '../providers/AuthProvider';
 import { login } from '../api/api';
 
+import { AuthInput } from '../components/AuthInput';
 import CustomLinearGradient from '../components/CustomLinearGradient';
 
 import PrecoroLogo from '../assets/images/precoroLogo.svg';
-import LoginIcon from '../assets/images/auth-screen-icons/login.svg';
-import PasswordIcon from '../assets/images/auth-screen-icons/password.svg';
 import GoogleIcon from '../assets/images/auth-screen-icons/google.svg';
+import LoginBackground from '../assets/images/auth-screen-icons/loginBackground.svg';
 
 export const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -41,12 +39,13 @@ export const LoginScreen = () => {
 
   const handleShowPassword = () => {
     setShowPassword((prev) => !prev);
-    console.log('show pass');
   };
 
   const handleUnavailableFeature = () => {
     Alert.alert('You cannot use this feature at the moment');
   };
+
+  const isLoginBtnDisabled = !email || !password;
 
   return (
     <CustomLinearGradient>
@@ -55,141 +54,69 @@ export const LoginScreen = () => {
           flex: 1,
         }}
       >
-        <View
-          style={{
-            flex: 1,
-            paddingHorizontal: 24,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <PrecoroLogo width={210} height={38} fill={'#1D2452'} />
+        <LoginBackground style={styles.backgroundIcon} />
 
-          {/* Email Input */}
-          <View style={{ width: '100%', marginTop: 46, gap: 5 }}>
-            <Text style={{ fontSize: 12, color: '#8E91A8', lineHeight: 16 }}>
-              Email
-            </Text>
-            <View style={styles.emailInputContainer}>
-              <LoginIcon
-                width={20}
-                height={20}
-                stroke="#8E91A8"
-                opacity={0.25}
-                style={styles.emailIcon}
-              />
-              <TextInput
-                value={email}
-                onChangeText={setEmail}
-                style={styles.emailInput}
-              />
-            </View>
-          </View>
+        <View style={styles.container}>
+          <PrecoroLogo
+            width={210}
+            height={38}
+            fill={'#1D2452'}
+            style={styles.precoroLogo}
+          />
 
-          {/* Password Input */}
-          <View style={{ width: '100%', marginTop: 12, gap: 5 }}>
-            <Text style={{ fontSize: 12, color: '#8E91A8', lineHeight: 16 }}>
-              Password
-            </Text>
+          <>
+            <AuthInput
+              label="Email"
+              inputValue={email}
+              onChangeText={setEmail}
+            />
 
-            <View style={styles.passwordInputContainer}>
-              <PasswordIcon
-                width={20}
-                height={20}
-                stroke="#8E91A8"
-                opacity={0.25}
-                style={styles.passwordIcon}
-              />
-              <TextInput
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry={!showPassword}
-                style={styles.passwordInput}
-              />
+            <AuthInput
+              label="Password"
+              inputValue={password}
+              onChangeText={setPassword}
+              secureTextEntry={!showPassword}
+              showPassword={showPassword}
+              handleShowPassword={handleShowPassword}
+            />
 
-              <Pressable
-                style={styles.showPasswordButton}
-                onPress={handleShowPassword}
-              >
-                {showPassword ? (
-                  <Ionicons
-                    name="eye-off-outline"
-                    size={20}
-                    color={'#BBBDCB'}
-                  />
-                ) : (
-                  <Ionicons name="eye-outline" size={20} color={'#BBBDCB'} />
-                )}
-              </Pressable>
-            </View>
-          </View>
+            <Pressable
+              onPress={handleLogin}
+              disabled={isLoginBtnDisabled}
+              style={({ pressed }) => [
+                { opacity: pressed || isLoginBtnDisabled ? 0.6 : 1 },
+                styles.loginButton,
+              ]}
+            >
+              <Text style={styles.loginButtonText}>Log In!</Text>
+            </Pressable>
+          </>
 
-          {/* Log In Button */}
-          <Pressable
-            onPress={handleLogin}
-            disabled={!email || !password}
-            style={{
-              marginTop: 20,
-              backgroundColor: '#8B91C1',
-              height: 34,
-              width: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 20,
-            }}
-          >
-            <Text style={{ color: '#fff', fontFamily: 'inter-semibold' }}>
-              Log In!
-            </Text>
-          </Pressable>
-
-          {/* line OR line */}
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginTop: 20,
-              height: 24,
-            }}
-          >
+          <View style={styles.orContainer}>
             <View style={styles.line} />
-            <Text style={{ paddingHorizontal: 8, color: '#8E91A8' }}>or</Text>
+            <Text style={styles.orText}>or</Text>
             <View style={styles.line} />
           </View>
 
-          {/* Google Sign In */}
           <Pressable
             onPress={handleUnavailableFeature}
-            style={{
-              flexDirection: 'row',
-              marginTop: 20,
-              backgroundColor: '#fff',
-              height: 34,
-              width: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 16,
-              gap: 5,
-            }}
+            style={({ pressed }) => [
+              { opacity: pressed ? 0.5 : 1 },
+              styles.googleButton,
+            ]}
           >
             <GoogleIcon />
-            <Text style={{ color: '#1D2452', fontFamily: 'inter-semibold' }}>
-              Sign In with Google
-            </Text>
+            <Text style={styles.googleButtonText}>Sign In with Google</Text>
           </Pressable>
 
-          {/* Signing Help */}
           <Pressable
-            style={{ marginTop: 150 }}
+            style={({ pressed }) => [
+              { opacity: pressed ? 0.5 : 1 },
+              styles.signingHelpButton,
+            ]}
             onPress={handleUnavailableFeature}
           >
-            <Text
-              style={{
-                color: '#8E91A8',
-                fontFamily: 'inter-semibold',
-                lineHeight: 15,
-              }}
-            >
+            <Text style={styles.signingHelpButtonText}>
               Need help signing in?
             </Text>
           </Pressable>
@@ -199,50 +126,58 @@ export const LoginScreen = () => {
   );
 };
 
-// TODO FIX ALL STYLES
-
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  precoroLogo: { marginBottom: 46 },
   line: {
     flex: 1,
     height: 1,
     backgroundColor: '#1D2452',
     opacity: 0.1,
   },
-  passwordInputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    position: 'relative',
-    height: 34,
-    backgroundColor: '#fff',
-    borderRadius: 8,
-  },
-  passwordIcon: {
-    marginLeft: 8,
-  },
-  passwordInput: {
-    flex: 1,
-    paddingLeft: 5,
-  },
-  showPasswordButton: {
+  backgroundIcon: {
+    zIndex: -11,
     position: 'absolute',
-    right: 8,
-    top: 0,
-    bottom: 0,
-    justifyContent: 'center',
+    left: 50,
   },
-  emailInputContainer: {
+  loginButton: {
+    marginTop: 20,
+    backgroundColor: '#8B91C1',
+    height: 34,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+  },
+  loginButtonText: { color: '#fff', fontFamily: 'inter-semibold' },
+  orContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    position: 'relative',
-    height: 34,
+    marginTop: 20,
+    height: 24,
+  },
+  orText: { paddingHorizontal: 8, color: '#8E91A8' },
+  googleButton: {
+    flexDirection: 'row',
+    marginTop: 20,
     backgroundColor: '#fff',
-    borderRadius: 8,
+    height: 34,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 16,
+    gap: 5,
   },
-  emailIcon: {
-    marginLeft: 8,
-  },
-  emailInput: {
-    flex: 1,
-    paddingLeft: 5,
+  googleButtonText: { color: '#1D2452', fontFamily: 'inter-semibold' },
+  signingHelpButton: { marginTop: 150 },
+  signingHelpButtonText: {
+    color: '#8E91A8',
+    fontFamily: 'inter-semibold',
+    lineHeight: 15,
   },
 });
