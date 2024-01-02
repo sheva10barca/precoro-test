@@ -9,7 +9,9 @@ import { UserProfileScreen } from '../screens/UserProfileScreen';
 export const Stack = createNativeStackNavigator();
 
 export const MainStack = () => (
-  <Stack.Navigator>
+  <Stack.Navigator
+    screenOptions={{ contentStyle: { backgroundColor: '#fff' } }}
+  >
     <Stack.Screen
       name="BottomTabs"
       component={BottomTabsNav}

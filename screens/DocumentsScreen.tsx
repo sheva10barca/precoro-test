@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
-import { FlatList, SafeAreaView, Text, View } from 'react-native';
+import { FlatList, SafeAreaView } from 'react-native';
 
 import { getPurchaseOrders } from '../api/api';
 import { AuthContext } from '../providers/AuthProvider';
 
 import { PurchaseOrderType } from '../types/PurchaseOrderType';
+import { PurchaseOrderItem } from '../components/PurchaseOrderItem';
 
 export const DocumentsScreen = () => {
   const { authToken } = useContext(AuthContext);
@@ -24,16 +25,24 @@ export const DocumentsScreen = () => {
 
   return (
     <SafeAreaView
-      style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+      style={{ flex: 1, marginTop: 25 }}
     >
       <FlatList
+        style={{ paddingHorizontal: 12 }}
         data={purchaseOrders}
         renderItem={({ item }) => (
-          <View style={{ marginTop: 20 }}>
-            <Text style={{ fontWeight: 'bold' }}>{item.creator}</Text>
-            <Text>{item.id}</Text>
-            <Text>{item.sum}</Text>
-          </View>
+          <PurchaseOrderItem
+            creator={item.creator}
+            currency={item.currency}
+            date={item.date}
+            description={item.description}
+            id={item.id}
+            idn={item.idn}
+            items={item.items}
+            status={item.status}
+            sum={item.sum}
+            key={item.id}
+          />
         )}
       />
     </SafeAreaView>

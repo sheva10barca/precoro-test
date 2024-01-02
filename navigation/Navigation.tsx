@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { MainStack } from './MainStack';

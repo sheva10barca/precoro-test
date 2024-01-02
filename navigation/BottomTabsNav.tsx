@@ -1,3 +1,4 @@
+import { TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { HomeScreen } from '../screens/HomeScreen';
@@ -14,26 +15,33 @@ export const BottomTabs = createBottomTabNavigator();
 
 export const BottomTabsNav = () => (
   <BottomTabs.Navigator
+    sceneContainerStyle={{ backgroundColor: '#fff' }}
     screenOptions={({ navigation }) => ({
       headerTintColor: '#1D2452',
       tabBarActiveTintColor: '#415ADA',
+      headerTitleStyle: { fontFamily: 'inter-semibold' },
+      contentStyle: { backgroundColor: '#fff' },
 
       headerLeft: () => (
-        <SupportIcon
-          width={24}
-          height={24}
+        <TouchableOpacity
           onPress={() => navigation.navigate('Support')}
-          style={{ marginLeft: 24 }}
-        />
+          hitSlop={{ bottom: 20, left: 20, right: 20, top: 20 }}
+        >
+          <SupportIcon width={24} height={24} style={{ marginLeft: 24 }} />
+        </TouchableOpacity>
       ),
       headerRight: () => (
-        <UserIcon
-          width={24}
-          height={24}
-          stroke={'#1D2452'}
+        <TouchableOpacity
           onPress={() => navigation.navigate('UserProfile')}
-          style={{ marginRight: 24 }}
-        />
+          hitSlop={{ bottom: 20, left: 20, right: 20, top: 20 }}
+        >
+          <UserIcon
+            width={24}
+            height={24}
+            stroke={'#1D2452'}
+            style={{ marginRight: 24 }}
+          />
+        </TouchableOpacity>
       ),
     })}
   >
