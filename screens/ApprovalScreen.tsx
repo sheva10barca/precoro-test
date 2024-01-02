@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export const ApprovalScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Approval Screen</Text>
+      <Text style={styles.title}>You do not have documents for approval</Text>
     </View>
   );
 };
@@ -17,5 +17,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'inter-bold',
     fontSize: 24,
+    textAlign: 'center',
+    color: '#1D2452',
   },
 });

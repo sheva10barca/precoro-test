@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import {
   Alert,
   Keyboard,
+  Linking,
   Pressable,
   SafeAreaView,
   StyleSheet,
@@ -19,6 +20,9 @@ import CustomLinearGradient from '../components/CustomLinearGradient';
 import PrecoroLogo from '../assets/images/precoroLogo.svg';
 import GoogleIcon from '../assets/images/auth-screen-icons/google.svg';
 import LoginBackground from '../assets/images/auth-screen-icons/loginBackground.svg';
+
+const HELP_URL =
+  'https://github.com/sheva10barca/precoro-test?tab=readme-ov-file#additional-instructions';
 
 export const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -49,6 +53,16 @@ export const LoginScreen = () => {
 
   const handleScreenPress = () => {
     Keyboard.dismiss();
+  };
+
+  const handlePressHelp = async () => {
+    const supported = await Linking.canOpenURL(HELP_URL);
+
+    if (supported) {
+      await Linking.openURL(HELP_URL);
+    } else {
+      Alert.alert("Couldn't open the URL:", HELP_URL);
+    }
   };
 
   return (
@@ -118,7 +132,7 @@ export const LoginScreen = () => {
                 { opacity: pressed ? 0.5 : 1 },
                 styles.signingHelpButton,
               ]}
-              onPress={handleUnavailableFeature}
+              onPress={handlePressHelp}
             >
               <Text style={styles.signingHelpButtonText}>
                 Need help signing in?

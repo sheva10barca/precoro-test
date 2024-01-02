@@ -17,5 +17,6 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'inter-bold',
     fontSize: 24,
+    color: '#1D2452',
   },
 });

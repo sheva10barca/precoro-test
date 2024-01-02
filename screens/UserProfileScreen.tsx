@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export const UserProfileScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>UserProfileScreen</Text>
+      <Text style={styles.title}>User Profile Screen</Text>
     </View>
   );
 };
@@ -17,5 +17,6 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'inter-bold',
     fontSize: 24,
+    color: '#1D2452',
   },
 });
