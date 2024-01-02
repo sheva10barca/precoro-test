@@ -7,7 +7,8 @@
 3. Navigate to the Project Directory ```cd your-repository```
 4. Install Dependencies ```npm install``` or ```yarn install```
 5. Start the App ```npm start``` or ```npx expo start```
-6. Once you've set these up, you can launch your app on an Android Virtual Device by running ```npm run android``` or on the iOS Simulator by running ```npm run ios``` (macOS only).
+6. Once you've set these up, you can launch your app on an Android Virtual Device by running ```npm run android``` or on the iOS Simulator by running ```npm run ios``` (macOS only). Also, you can download the Expo Go app on your iPhone from the [App Store](https://apps.apple.com/us/app/expo-go/id982107779), scan the QR code displayed in the terminal after launching the app, and run it on your device.
+   
 
 ## Additional Instructions
 
