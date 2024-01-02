@@ -58,9 +58,9 @@ export const AuthInput: React.FC<Props> = ({
             onPress={handleShowPassword}
           >
             {showPassword ? (
-              <Ionicons name="eye-off-outline" size={20} color={'#BBBDCB'} />
-            ) : (
               <Ionicons name="eye-outline" size={20} color={'#BBBDCB'} />
+            ) : (
+              <Ionicons name="eye-off-outline" size={20} color={'#BBBDCB'} />
             )}
           </Pressable>
         )}

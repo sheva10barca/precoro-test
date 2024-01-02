@@ -10,8 +10,6 @@ export const login = async (email: string, password: string) => {
       password,
     });
 
-    console.log(response.data);
-
     if (response.status === 200) {
       const authToken = response.data.token;
 

@@ -1,10 +1,12 @@
 import { useContext, useState } from 'react';
 import {
   Alert,
+  Keyboard,
   Pressable,
   SafeAreaView,
   StyleSheet,
   Text,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 
@@ -31,9 +33,7 @@ export const LoginScreen = () => {
 
       setAuthToken(token);
     } else {
-      Alert.alert(
-        'You can log in only with email: "test" and password: "password"',
-      );
+      Alert.alert('Wrong login or password');
     }
   };
 
@@ -42,10 +42,14 @@ export const LoginScreen = () => {
   };
 
   const handleUnavailableFeature = () => {
-    Alert.alert('You cannot use this feature at the moment');
+    Alert.alert('We are sorry, but this feature is not implemented yet');
   };
 
   const isLoginBtnDisabled = !email || !password;
+
+  const handleScreenPress = () => {
+    Keyboard.dismiss();
+  };
 
   return (
     <CustomLinearGradient>
@@ -54,73 +58,74 @@ export const LoginScreen = () => {
           flex: 1,
         }}
       >
-        <LoginBackground style={styles.backgroundIcon} />
-
-        <View style={styles.container}>
-          <PrecoroLogo
-            width={210}
-            height={38}
-            fill={'#1D2452'}
-            style={styles.precoroLogo}
-          />
-
-          <>
-            <AuthInput
-              label="Email"
-              inputValue={email}
-              onChangeText={setEmail}
+        <TouchableWithoutFeedback onPress={handleScreenPress}>
+          <View style={styles.container}>
+            <LoginBackground style={styles.backgroundIcon} />
+            <PrecoroLogo
+              width={210}
+              height={38}
+              fill={'#1D2452'}
+              style={styles.precoroLogo}
             />
 
-            <AuthInput
-              label="Password"
-              inputValue={password}
-              onChangeText={setPassword}
-              secureTextEntry={!showPassword}
-              showPassword={showPassword}
-              handleShowPassword={handleShowPassword}
-            />
+            <>
+              <AuthInput
+                label="Email"
+                inputValue={email}
+                onChangeText={setEmail}
+              />
+
+              <AuthInput
+                label="Password"
+                inputValue={password}
+                onChangeText={setPassword}
+                secureTextEntry={!showPassword}
+                showPassword={showPassword}
+                handleShowPassword={handleShowPassword}
+              />
+
+              <Pressable
+                onPress={handleLogin}
+                disabled={isLoginBtnDisabled}
+                style={({ pressed }) => [
+                  { opacity: pressed || isLoginBtnDisabled ? 0.6 : 1 },
+                  styles.loginButton,
+                ]}
+              >
+                <Text style={styles.loginButtonText}>Log In!</Text>
+              </Pressable>
+            </>
+
+            <View style={styles.orContainer}>
+              <View style={styles.line} />
+              <Text style={styles.orText}>or</Text>
+              <View style={styles.line} />
+            </View>
 
             <Pressable
-              onPress={handleLogin}
-              disabled={isLoginBtnDisabled}
+              onPress={handleUnavailableFeature}
               style={({ pressed }) => [
-                { opacity: pressed || isLoginBtnDisabled ? 0.6 : 1 },
-                styles.loginButton,
+                { opacity: pressed ? 0.5 : 1 },
+                styles.googleButton,
               ]}
             >
-              <Text style={styles.loginButtonText}>Log In!</Text>
+              <GoogleIcon />
+              <Text style={styles.googleButtonText}>Sign In with Google</Text>
             </Pressable>
-          </>
 
-          <View style={styles.orContainer}>
-            <View style={styles.line} />
-            <Text style={styles.orText}>or</Text>
-            <View style={styles.line} />
+            <Pressable
+              style={({ pressed }) => [
+                { opacity: pressed ? 0.5 : 1 },
+                styles.signingHelpButton,
+              ]}
+              onPress={handleUnavailableFeature}
+            >
+              <Text style={styles.signingHelpButtonText}>
+                Need help signing in?
+              </Text>
+            </Pressable>
           </View>
-
-          <Pressable
-            onPress={handleUnavailableFeature}
-            style={({ pressed }) => [
-              { opacity: pressed ? 0.5 : 1 },
-              styles.googleButton,
-            ]}
-          >
-            <GoogleIcon />
-            <Text style={styles.googleButtonText}>Sign In with Google</Text>
-          </Pressable>
-
-          <Pressable
-            style={({ pressed }) => [
-              { opacity: pressed ? 0.5 : 1 },
-              styles.signingHelpButton,
-            ]}
-            onPress={handleUnavailableFeature}
-          >
-            <Text style={styles.signingHelpButtonText}>
-              Need help signing in?
-            </Text>
-          </Pressable>
-        </View>
+        </TouchableWithoutFeedback>
       </SafeAreaView>
     </CustomLinearGradient>
   );
@@ -143,7 +148,8 @@ const styles = StyleSheet.create({
   backgroundIcon: {
     zIndex: -11,
     position: 'absolute',
-    left: 50,
+    left: 8,
+    top: -50
   },
   loginButton: {
     marginTop: 20,

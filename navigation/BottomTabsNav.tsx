@@ -1,9 +1,12 @@
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
 
 import { HomeScreen } from '../screens/HomeScreen';
 import { DocumentsScreen } from '../screens/DocumentsScreen';
 import { ApprovalScreen } from '../screens/ApprovalScreen';
+
+import { ScreenNames } from '../types/ScreenNames';
 
 import HomeIcon from '../assets/images/bot-nav-icons/home.svg';
 import ApprovalIcon from '../assets/images/bot-nav-icons/revision-history.svg';
@@ -24,7 +27,7 @@ export const BottomTabsNav = () => (
 
       headerLeft: () => (
         <TouchableOpacity
-          onPress={() => navigation.navigate('Support')}
+          onPress={() => navigation.navigate(ScreenNames.Support)}
           hitSlop={{ bottom: 20, left: 20, right: 20, top: 20 }}
         >
           <SupportIcon width={24} height={24} style={{ marginLeft: 24 }} />
@@ -32,7 +35,7 @@ export const BottomTabsNav = () => (
       ),
       headerRight: () => (
         <TouchableOpacity
-          onPress={() => navigation.navigate('UserProfile')}
+          onPress={() => navigation.navigate(ScreenNames.UserProfile)}
           hitSlop={{ bottom: 20, left: 20, right: 20, top: 20 }}
         >
           <UserIcon
@@ -46,7 +49,7 @@ export const BottomTabsNav = () => (
     })}
   >
     <BottomTabs.Screen
-      name="Home"
+      name={ScreenNames.Home}
       component={HomeScreen}
       options={{
         tabBarIcon: ({ color, size }) => (
@@ -55,16 +58,29 @@ export const BottomTabsNav = () => (
       }}
     />
     <BottomTabs.Screen
-      name="Approval"
+      name={ScreenNames.Approval}
       component={ApprovalScreen}
       options={{
         tabBarIcon: ({ color, size }) => (
-          <ApprovalIcon width={size} height={size} stroke={color} />
+          <View style={{ position: 'relative' }}>
+            <ApprovalIcon
+              width={size}
+              height={size}
+              stroke={color}
+            />
+            {/* // TODO add a real condition for displaying an icon */}
+            {true && <Ionicons
+              name="ellipse"
+              style={{ position: 'absolute', top: -2, right: -2 }}
+              size={10}
+              color={'#D66262'}
+            />}
+          </View>
         ),
       }}
     />
     <BottomTabs.Screen
-      name="Documents"
+      name={ScreenNames.Documents}
       component={DocumentsScreen}
       options={{
         title: 'Purchase Orders',

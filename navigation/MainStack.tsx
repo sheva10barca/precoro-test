@@ -6,6 +6,8 @@ import { HomeScreen } from '../screens/HomeScreen';
 import { SupportScreen } from '../screens/SupportScreen';
 import { UserProfileScreen } from '../screens/UserProfileScreen';
 
+import { ScreenNames } from '../types/ScreenNames';
+
 export const Stack = createNativeStackNavigator();
 
 export const MainStack = () => (
@@ -13,12 +15,16 @@ export const MainStack = () => (
     screenOptions={{ contentStyle: { backgroundColor: '#fff' } }}
   >
     <Stack.Screen
-      name="BottomTabs"
+      name={ScreenNames.BottomTabs}
       component={BottomTabsNav}
       options={{ headerShown: false }}
     />
-    <Stack.Screen name="Home" component={HomeScreen} />
-    <Stack.Screen name="Support" component={SupportScreen} />
-    <Stack.Screen name="UserProfile" component={UserProfileScreen} />
+    <Stack.Screen name={ScreenNames.Home} component={HomeScreen} />
+    <Stack.Screen name={ScreenNames.Support} component={SupportScreen} />
+    <Stack.Screen
+      name={ScreenNames.UserProfile}
+      component={UserProfileScreen}
+      options={{ title: 'Profile' }}
+    />
   </Stack.Navigator>
 );
