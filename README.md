@@ -1,5 +1,7 @@
 # Precoro Test
 
+The application is implemented according to [this design](https://www.figma.com/file/As32S09q0rMeXwtdoZXveW/Precoro-React-Native-test-task?type=design&node-id=0-1&mode=design&t=JzjbyJUmG0CG8Dua-0).
+
 ## Running the App
 
 1. Open a new bash shell
