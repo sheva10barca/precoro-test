@@ -1,9 +1,12 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
+import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 
-import CustomSplashScreen from '../screens/CustomSplashScreen';
+import { StyleSheet, View } from 'react-native';
 
-const FontLoader: FC<{ children: React.ReactNode }> = ({ children }) => {
+SplashScreen.preventAutoHideAsync();
+
+export const FontLoader: FC<{ children: React.ReactNode }> = ({ children }) => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
   const loadFontsAsync = async () => {
@@ -13,10 +16,10 @@ const FontLoader: FC<{ children: React.ReactNode }> = ({ children }) => {
         'inter-semibold': require('../assets/fonts/Inter-SemiBold.ttf'),
         'inter-bold': require('../assets/fonts/Inter-Bold.ttf'),
       });
-
-      setFontsLoaded(true);
     } catch (error) {
-      console.error('Error loading fonts:', error);
+      console.warn('Error loading fonts:', error);
+    } finally {
+      setFontsLoaded(true);
     }
   };
 
@@ -24,11 +27,25 @@ const FontLoader: FC<{ children: React.ReactNode }> = ({ children }) => {
     loadFontsAsync();
   }, []);
 
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
   if (!fontsLoaded) {
-    return <CustomSplashScreen />;
+    return null;
   }
 
-  return <>{children}</>;
+  return (
+    <View style={styles.container} onLayout={onLayoutRootView}>
+      {children}
+    </View>
+  );
 };
 
-export default FontLoader;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
