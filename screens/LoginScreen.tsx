@@ -15,7 +15,7 @@ import { AuthContext } from '../providers/AuthProvider';
 import { login } from '../api/api';
 
 import { AuthInput } from '../components/AuthInput';
-import CustomLinearGradient from '../components/CustomLinearGradient';
+import { CustomLinearGradient } from '../components/CustomLinearGradient';
 
 import PrecoroLogo from '../assets/images/precoroLogo.svg';
 import GoogleIcon from '../assets/images/auth-screen-icons/google.svg';

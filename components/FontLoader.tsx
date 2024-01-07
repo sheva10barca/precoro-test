@@ -1,8 +1,8 @@
 import { FC, useCallback, useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 
-import { StyleSheet, View } from 'react-native';
 
 SplashScreen.preventAutoHideAsync();
 

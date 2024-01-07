@@ -12,7 +12,10 @@ export const Stack = createNativeStackNavigator();
 
 export const MainStack = () => (
   <Stack.Navigator
-    screenOptions={{ contentStyle: { backgroundColor: '#fff' } }}
+    screenOptions={{
+      contentStyle: { backgroundColor: '#fff' },
+      headerTitleAlign: 'center',
+    }}
   >
     <Stack.Screen
       name={ScreenNames.BottomTabs}

@@ -22,8 +22,21 @@ export const BottomTabsNav = () => (
     screenOptions={({ navigation }) => ({
       headerTintColor: '#1D2452',
       tabBarActiveTintColor: '#415ADA',
-      headerTitleStyle: { fontFamily: 'inter-semibold' },
+      headerTitleStyle: {
+        fontFamily: 'inter-semibold',
+      },
       contentStyle: { backgroundColor: '#fff' },
+      tabBarStyle: {
+        height: 75,
+        paddingVertical: 14,
+      },
+      tabBarLabelStyle: {
+        opacity: 0.5,
+        flex: 1,
+        letterSpacing: -0.2,
+        marginTop: 4,
+      },
+      headerTitleAlign: 'center',
 
       headerLeft: () => (
         <TouchableOpacity

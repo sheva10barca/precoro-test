@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 import { StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const CustomLinearGradient: FC<{ children: ReactNode }> = ({ children }) => (
+export const CustomLinearGradient: FC<{ children: ReactNode }> = ({ children }) => (
   <LinearGradient
     colors={['#F9FAFF', '#DFE1EF']}
     style={styles.container}
@@ -19,4 +19,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CustomLinearGradient;

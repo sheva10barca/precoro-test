@@ -13,30 +13,33 @@ export const PurchaseOrderItem: React.FC<PurchaseOrderType> = ({
   sum,
 }) => {
   const normalizedDate = moment(date).format('MMM DD YYYY');
+  const formattedSum = sum.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 
   return (
     <TouchableOpacity style={styles.container}>
-      <View style={styles.leftColumnContainer}>
-        <View style={styles.topColumnContainer}>
+      <View style={styles.topBlock}>
+        <View style={styles.row}>
           <Text style={styles.title}>Purchase Order {idn}</Text>
-          <Text style={styles.description}>{description}</Text>
+          <Text style={styles.date}>{normalizedDate}</Text>
         </View>
-
-        <View style={styles.botColumnContainer}>
-          <Text style={styles.requestedBy}>Requested by</Text>
-          <Text style={styles.creator}>{creator}</Text>
+        <View style={styles.row}>
+          <Text style={styles.description}>{description}</Text>
         </View>
       </View>
 
-      <View style={styles.rightColumnContainer}>
-        <View style={styles.topColumnContainer}>
-          <Text style={styles.date}>{normalizedDate}</Text>
+      <View style={styles.botBlock}>
+        <View style={styles.row}>
+          <Text style={styles.requestedBy}>Requested by</Text>
+          <Text style={styles.sum}>
+            {formattedSum} {currency}
+          </Text>
         </View>
 
-        <View style={styles.botColumnContainer}>
-          <Text style={styles.sum}>
-            {sum} {currency}
-          </Text>
+        <View style={styles.row}>
+          <Text style={styles.creator}>{creator}</Text>
           <Text style={styles.items}>
             {items} {items === 1 ? 'item' : 'items'}
           </Text>
@@ -53,26 +56,58 @@ const styles = StyleSheet.create({
     borderColor: '#E8E9EE',
     borderRadius: 8,
     marginBottom: 8,
+    borderWidth: 1,
+    gap: 16,
+  },
+  topBlock: {
+    flex: 1,
+    gap: 5,
+  },
+  botBlock: {
+    flex: 1,
+    gap: 1,
+  },
+  row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderWidth: 1,
+    alignItems: 'center',
   },
   title: {
     fontFamily: 'inter-semibold',
     color: '#1D2452',
     fontSize: 14,
+    lineHeight: 15,
   },
-  description: { color: '#8E91A8', fontSize: 12 },
-  requestedBy: { color: '#8E91A8', fontSize: 10 },
-  creator: { fontSize: 12, color: '#1D2452' },
-  date: { fontSize: 12, color: '#8E91A8' },
-  sum: { fontFamily: 'inter-bold', fontSize: 12, color: '#1D2452' },
-  items: { textAlign: 'right', fontSize: 12, color: '#1D2452' },
-  topColumnContainer: { gap: 5 },
-  botColumnContainer: { gap: 2 },
-  leftColumnContainer: { gap: 16 },
-  rightColumnContainer: {
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
+  description: {
+    color: '#8E91A8',
+    fontSize: 12,
+    lineHeight: 15,
+  },
+  requestedBy: {
+    color: '#8E91A8',
+    fontSize: 10,
+    lineHeight: 15,
+  },
+  creator: {
+    fontSize: 12,
+    color: '#1D2452',
+    lineHeight: 15,
+  },
+  date: {
+    fontSize: 12,
+    color: '#8E91A8',
+    lineHeight: 15,
+  },
+  sum: {
+    fontFamily: 'inter-bold',
+    fontSize: 12,
+    color: '#1D2452',
+    lineHeight: 15,
+  },
+  items: {
+    textAlign: 'right',
+    fontSize: 12,
+    color: '#1D2452',
+    lineHeight: 15,
   },
 });
