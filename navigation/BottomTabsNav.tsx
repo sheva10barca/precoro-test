@@ -30,7 +30,12 @@ export const BottomTabsNav = () => (
           onPress={() => navigation.navigate(ScreenNames.Support)}
           hitSlop={{ bottom: 20, left: 20, right: 20, top: 20 }}
         >
-          <SupportIcon width={24} height={24} style={{ marginLeft: 24 }} />
+          <SupportIcon
+            width={24}
+            height={24}
+            style={{ marginLeft: 24 }}
+            opacity={0.5}
+          />
         </TouchableOpacity>
       ),
       headerRight: () => (
@@ -41,8 +46,9 @@ export const BottomTabsNav = () => (
           <UserIcon
             width={24}
             height={24}
-            stroke={'#1D2452'}
             style={{ marginRight: 24 }}
+            fill={'#1D2452'}
+            opacity={0.5}
           />
         </TouchableOpacity>
       ),
@@ -53,7 +59,7 @@ export const BottomTabsNav = () => (
       component={HomeScreen}
       options={{
         tabBarIcon: ({ color, size }) => (
-          <HomeIcon width={size} height={size} stroke={color} />
+          <HomeIcon width={size} height={size} fill={color} />
         ),
       }}
     />
@@ -63,18 +69,16 @@ export const BottomTabsNav = () => (
       options={{
         tabBarIcon: ({ color, size }) => (
           <View style={{ position: 'relative' }}>
-            <ApprovalIcon
-              width={size}
-              height={size}
-              stroke={color}
-            />
+            <ApprovalIcon width={size} height={size} fill={color} />
             {/* // TODO add a real condition for displaying an icon */}
-            {true && <Ionicons
-              name="ellipse"
-              style={{ position: 'absolute', top: -2, right: -2 }}
-              size={10}
-              color={'#D66262'}
-            />}
+            {true && (
+              <Ionicons
+                name="ellipse"
+                style={{ position: 'absolute', top: -2, right: -2 }}
+                size={10}
+                color={'#D66262'}
+              />
+            )}
           </View>
         ),
       }}
@@ -86,7 +90,7 @@ export const BottomTabsNav = () => (
         title: 'Purchase Orders',
         tabBarLabel: 'Documents',
         tabBarIcon: ({ color, size }) => (
-          <DocumentsIcon width={size} height={size} stroke={color} />
+          <DocumentsIcon width={size} height={size} fill={color} />
         ),
       }}
     />

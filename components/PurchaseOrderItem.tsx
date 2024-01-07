@@ -48,7 +48,6 @@ export const PurchaseOrderItem: React.FC<PurchaseOrderType> = ({
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: '#fff',
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderColor: '#E8E9EE',
@@ -58,7 +57,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderWidth: 1,
   },
-  title: { fontFamily: 'inter-semibold', color: '#1D2452', fontSize: 14 },
+  title: {
+    fontFamily: 'inter-semibold',
+    color: '#1D2452',
+    fontSize: 14,
+  },
   description: { color: '#8E91A8', fontSize: 12 },
   requestedBy: { color: '#8E91A8', fontSize: 10 },
   creator: { fontSize: 12, color: '#1D2452' },
