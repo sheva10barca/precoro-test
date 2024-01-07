@@ -79,6 +79,8 @@ const styles = StyleSheet.create({
     height: 34,
     backgroundColor: '#fff',
     borderRadius: 8,
+    borderColor: '#BBBDCB',
+    borderWidth: 1,
   },
   inputIcon: {
     marginLeft: 8,

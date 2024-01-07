@@ -32,11 +32,11 @@ export const LoginScreen = () => {
   const { setAuthToken } = useContext(AuthContext);
 
   const handleLogin = async () => {
-    if (email === 'test' && password === 'password') {
+    try {
       const token = await login(email, password);
 
       setAuthToken(token);
-    } else {
+    } catch (e) {
       Alert.alert('Wrong login or password');
     }
   };
@@ -192,6 +192,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 16,
     gap: 5,
+    borderColor: '#D2D3DB',
+    borderWidth: 1,
   },
   googleButtonText: { color: '#1D2452', fontFamily: 'inter-semibold' },
   signingHelpButton: { marginTop: 150 },
