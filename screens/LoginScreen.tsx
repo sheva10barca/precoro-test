@@ -9,6 +9,7 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
+  ActivityIndicator,
 } from 'react-native';
 
 import { AuthContext } from '../providers/AuthProvider';
@@ -28,16 +29,21 @@ export const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isLogginingIn, setIsLogginingIn] = useState(false);
 
   const { setAuthToken } = useContext(AuthContext);
 
   const handleLogin = async () => {
+    setIsLogginingIn(true);
+
     try {
       const token = await login(email, password);
 
       setAuthToken(token);
     } catch (e) {
       Alert.alert('Wrong login or password');
+    } finally {
+      setIsLogginingIn(false);
     }
   };
 
@@ -49,7 +55,7 @@ export const LoginScreen = () => {
     Alert.alert('We are sorry, but this feature is not implemented yet');
   };
 
-  const isLoginBtnDisabled = !email || !password;
+  const isLoginBtnDisabled = !email || !password || isLogginingIn;
 
   const handleScreenPress = () => {
     Keyboard.dismiss();
@@ -106,7 +112,11 @@ export const LoginScreen = () => {
                   styles.loginButton,
                 ]}
               >
-                <Text style={styles.loginButtonText}>Log In!</Text>
+                {isLogginingIn ? (
+                  <ActivityIndicator size="small" color="#1D2452" />
+                ) : (
+                  <Text style={styles.loginButtonText}>Log In!</Text>
+                )}
               </Pressable>
             </>
 
@@ -163,7 +173,7 @@ const styles = StyleSheet.create({
     zIndex: -11,
     position: 'absolute',
     left: 8,
-    top: -50
+    top: -50,
   },
   loginButton: {
     marginTop: 20,
